@@ -72,7 +72,8 @@ public_users.get('/title/:title', (req, res) => {
 // Get book reviews
 public_users.get('/review/:isbn', (req, res) => {
   let isbn = req.params.isbn;
-  let book = Object.values(books).filter(book => book.isbn === isbn);
+
+  let book = Object.values(books).find(book => book.isbn === isbn);
 
   if (book) {
     return res.status(200).json(book.reviews);
