@@ -9,16 +9,16 @@ const public_users = express.Router();
 public_users.post("/register", (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required" });
-  } 
-  
-  if (!isValid(username)) {
-    return res.status(409).json({ message: "User already exists!" });
-  }
+    if (!username || !password) {
+      return res.status(400).json({ message: "Username and password are required" });
+    } 
+    
+    if (isValid(username)) {
+      return res.status(409).json({ message: `${username} username already exists!` });
+    }
 
-  users.push({ username, password });
-  return res.status(200).json({ message: "User successfully registered" });
+    users.push({ username, password });
+    return res.status(200).json({ message: `${username} successfully registered` });
 });
 
 // Get all books
